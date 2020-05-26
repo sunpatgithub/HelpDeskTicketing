@@ -13,7 +13,7 @@ namespace HR.WebApi.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [ActionFilters.Log]
-    [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+    //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
     public class DesignationController : ControllerBase
     {
         private ICommonRepository<DesignationView> designationRepository { get; set; }

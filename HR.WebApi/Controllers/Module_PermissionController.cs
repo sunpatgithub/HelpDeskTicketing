@@ -13,7 +13,7 @@ namespace HR.WebApi.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [ActionFilters.Log]
-    [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+    //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
     public class Module_PermissionController : ControllerBase
     {
         private ICommonRepository<Module_PermissionView> Module_PermissionRepo { get; set; }

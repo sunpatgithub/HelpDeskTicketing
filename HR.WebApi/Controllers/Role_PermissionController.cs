@@ -14,7 +14,7 @@ namespace HR.WebApi.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [ActionFilters.Log]
-    [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+    //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
     public class Role_PermissionController : ControllerBase
     {
         private ICommonRepository<Role_Permission> role_permissionRepository { get; set; }

@@ -13,7 +13,7 @@ namespace HR.WebApi.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     [ActionFilters.Log]
-    [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+    //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
     public class User_RoleController : ControllerBase
     {
         private ICommonRepository<User_RoleView> user_RoleRepository { get; set; }

@@ -29,7 +29,7 @@ namespace HR.WebApi.Controllers
         //Get All User Data
         [HttpGet]
         [HttpGet("{recordLimit}")]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.ViewAll })]
         public IActionResult GetAll(int RecordLimit)
         {
@@ -54,7 +54,7 @@ namespace HR.WebApi.Controllers
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.View })]
         public IActionResult Get(int id)
         {
@@ -80,7 +80,7 @@ namespace HR.WebApi.Controllers
         // GET: api/User/
         //[HttpGet] old
         [HttpPost]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.View })]
         public IActionResult FindPagination(Pagination pagination)
         {
@@ -115,7 +115,7 @@ namespace HR.WebApi.Controllers
         // POST: api/User
         [HttpPost]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Add })]
         public IActionResult Add(UserView user)
         {
@@ -156,7 +156,7 @@ namespace HR.WebApi.Controllers
         // PUT: api/User/5
         [HttpPut]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Edit })]
         public IActionResult Edit(UserView user)
         {
@@ -195,7 +195,7 @@ namespace HR.WebApi.Controllers
         //User StatusChange - active/inactive
         [HttpPut("{id},{isActive}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Edit })]
         public IActionResult StatusChange(int id, short isActive)
         {
@@ -223,7 +223,7 @@ namespace HR.WebApi.Controllers
         // DELETE: api/User/5
         [HttpDelete("{id}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Delete })]
         public IActionResult Delete(int id)
         {
@@ -251,7 +251,7 @@ namespace HR.WebApi.Controllers
         //User Password change
         [HttpPut("{user_Id},{oldPassword},{newPassword}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         public IActionResult ChangePassword(int user_Id, string oldPassword, string newPassword)
         {
             ResponseHelper objResHelper = new ResponseHelper();
@@ -275,7 +275,7 @@ namespace HR.WebApi.Controllers
         //Admin forcefully reset password with custom password
         [HttpPost("{login_Id},{password}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         public IActionResult AdminChangePassword(string login_Id, string password)
         {
             ResponseHelper objResHelper = new ResponseHelper();
@@ -419,7 +419,7 @@ namespace HR.WebApi.Controllers
 
         [HttpPost("{id}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [ServiceFilter(typeof(ActionFilters.TokenVerify))]
+        //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
         public IActionResult SignOut(int id)
         {
             ResponseHelper objResHelper = new ResponseHelper();
