@@ -22,6 +22,7 @@ namespace HR.WebApi.DAL
         public void RollBackTransaction(short CommandTimeout = 180)
         {
             base.Database.SetCommandTimeout(CommandTimeout);
+
             base.Database.RollbackTransaction();
         }
 
@@ -89,5 +90,11 @@ namespace HR.WebApi.DAL
 
 
         public DbSet<Category> category { get; set; }
+
+        public DbSet<Ticket> Ticket { get; set; }
+
+        public DbSet<TicketLog> TicketLog { get; set; }
+
+        public DbSet<Attachment> Attachment { get; set; }
     }
 }
