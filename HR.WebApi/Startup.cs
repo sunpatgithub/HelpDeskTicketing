@@ -176,6 +176,11 @@ namespace HR.WebApi
             services.AddTransient(typeof(ICommonRepository<Role_Permission>), typeof(Role_PermissionRepository<Role_Permission>));
             services.AddTransient(typeof(ICommonRepository<Model.Module>), typeof(ModuleRepository<Model.Module>));
 
+            #region Help Desk Repository List
+            services.AddTransient(typeof(ICommonRepository<Category>), typeof(CategoryRepository<Category>));
+            #endregion
+
+
             //services.AddTransient(typeof(IActivity<EmployeeView>), typeof(Activities.PayrollActivity));
             //services.AddTransient(typeof(Activities.PayrollService));
 
