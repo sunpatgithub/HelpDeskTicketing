@@ -86,5 +86,8 @@ namespace HR.WebApi.DAL
         //public DbSet<Report_Group> report_group { get; set; }
         //public DbSet<Report_Group_Link> report_group_link { get; set; }
         //public DbSet<Report_Builder> report_builder { get; set; }
+
+
+        public DbSet<Category> category { get; set; }
     }
 }
