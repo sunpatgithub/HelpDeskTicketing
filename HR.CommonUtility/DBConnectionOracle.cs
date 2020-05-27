@@ -9,7 +9,7 @@ namespace HR.CommonUtility
     {
         public string Connect()
         {
-            return "server=172.16.2.129;port=3306;database=hr_proj;user=root;password=root2233;SslMode=None;";
+            return "server=172.16.2.129;port=3306;database=helpdesk;user=root;password=root2233;SslMode=None;";
         }
 
         public int ConnectionTimeout()
