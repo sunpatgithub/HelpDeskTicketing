@@ -91,7 +91,7 @@ namespace HR.WebApi.DAL
 
         public DbSet<Category> category { get; set; }
 
-        public DbSet<Ticket> Ticket { get; set; }
+        public DbSet<Ticket> ticket { get; set; }
 
         public DbSet<TicketLog> TicketLog { get; set; }
 
