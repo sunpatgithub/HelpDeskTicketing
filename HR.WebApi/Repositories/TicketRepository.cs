@@ -24,9 +24,9 @@ namespace HR.WebApi.Repositories
             {
                 IEnumerable<Ticket> vList;
                 if (RecordLimit > 0)
-                    vList = adbContext.Ticket.Take(RecordLimit).ToList();
+                    vList = adbContext.ticket.Take(RecordLimit).ToList();
                 else
-                    vList = adbContext.Ticket.ToList();
+                    vList = adbContext.ticket.ToList();
                 if (vList == null || vList.Count() == 0)
                     throw new RecoredNotFoundException("Get Data Empty");
 
@@ -42,7 +42,7 @@ namespace HR.WebApi.Repositories
         {
             try
             {
-                var vList = adbContext.Ticket.Where(w => w.TicketId == id).ToList();
+                var vList = adbContext.ticket.Where(w => w.TicketId == id).ToList();
                 if (vList == null || vList.Count() == 0)
                     throw new RecoredNotFoundException("Get Data Empty");
 
@@ -60,9 +60,9 @@ namespace HR.WebApi.Repositories
             {
                 IEnumerable<Ticket> vList;
                 if (String.IsNullOrEmpty(searchValue))
-                    vList = adbContext.Ticket.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                    vList = adbContext.ticket.Skip(pageIndex * pageSize).Take(pageSize).ToList();
                 else
-                    vList = adbContext.Ticket.Where(w => new[] { w.Subject.ToLower() }.Any(a => a.Contains(searchValue.ToLower()))).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                    vList = adbContext.ticket.Where(w => new[] { w.Subject.ToLower() }.Any(a => a.Contains(searchValue.ToLower()))).Skip(pageIndex * pageSize).Take(pageSize).ToList();
                 if (vList == null || vList.Count() == 0)
                     throw new RecoredNotFoundException("Get Data Empty");
 
@@ -79,7 +79,7 @@ namespace HR.WebApi.Repositories
             try
             {
                 entity.AddedOn = DateTime.Now;
-                adbContext.Ticket.Add(entity);
+                adbContext.ticket.Add(entity);
                 await Task.FromResult(adbContext.SaveChanges());
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@ namespace HR.WebApi.Repositories
             {
                 try
                 {
-                    var lstTicket = adbContext.Ticket.Where(x => x.TicketId == entity.TicketId).FirstOrDefault();
+                    var lstTicket = adbContext.ticket.Where(x => x.TicketId == entity.TicketId).FirstOrDefault();
                     if (lstTicket == null)
                         throw new RecoredNotFoundException("Data Not Available");
                     lstTicket.RequesterId = entity.RequesterId;
@@ -112,7 +112,7 @@ namespace HR.WebApi.Repositories
                     lstTicket.UpdatedOn = DateTime.Now;
                     
 
-                    adbContext.Ticket.Update(lstTicket);
+                    adbContext.ticket.Update(lstTicket);
                     await Task.FromResult(adbContext.SaveChanges());
 
                 }
@@ -132,11 +132,11 @@ namespace HR.WebApi.Repositories
             try
             {
                 //update flag isActive=0
-                var vList = adbContext.Ticket.Where(w => w.TicketId == id && w.IsActive != isActive).SingleOrDefault();
+                var vList = adbContext.ticket.Where(w => w.TicketId == id && w.IsActive != isActive).SingleOrDefault();
                 if (vList == null)
                     throw new RecoredNotFoundException("Data Not Available");
                 vList.IsActive = isActive;
-                adbContext.Ticket.Update(vList);
+                adbContext.ticket.Update(vList);
                 await Task.FromResult(adbContext.SaveChanges());
 
             }
@@ -151,10 +151,10 @@ namespace HR.WebApi.Repositories
             try
             {
                 //Delete Category
-                var vList = adbContext.Ticket.Where(w => w.TicketId == id).ToList().SingleOrDefault();
+                var vList = adbContext.ticket.Where(w => w.TicketId == id).ToList().SingleOrDefault();
                 if (vList == null)
                     throw new RecoredNotFoundException("Data Not Available");
-                adbContext.Ticket.Remove(vList);
+                adbContext.ticket.Remove(vList);
                 await Task.FromResult(adbContext.SaveChanges());
 
             }
@@ -170,9 +170,9 @@ namespace HR.WebApi.Repositories
             {
                 int intCount = 0;
                 if (entity.TicketId > 0)
-                    intCount = adbContext.Ticket.Where(w => w.TicketId != entity.TicketId && (w.Subject == entity.Subject)).Count();
+                    intCount = adbContext.ticket.Where(w => w.TicketId != entity.TicketId && (w.Subject == entity.Subject)).Count();
                 else
-                    intCount = adbContext.Ticket.Where(w => w.Subject == entity.Subject).Count();
+                    intCount = adbContext.ticket.Where(w => w.Subject == entity.Subject).Count();
                 return (intCount > 0 ? true : false);
             }
             catch (Exception ex)
@@ -188,13 +188,13 @@ namespace HR.WebApi.Repositories
                 if (String.IsNullOrEmpty(searchValue))
                 {
                     //Find Category all no of rows
-                    var vCount = adbContext.Ticket.Count();
+                    var vCount = adbContext.ticket.Count();
                     return vCount;
                 }
                 else
                 {
                     //Find Category no of rows with Searching
-                    var vCount = adbContext.Ticket.Where(w => new[] { w.Subject.ToLower() }.Any(a => a.Contains(searchValue.ToLower()))).Count();
+                    var vCount = adbContext.ticket.Where(w => new[] { w.Subject.ToLower() }.Any(a => a.Contains(searchValue.ToLower()))).Count();
                     return vCount;
                 }
             }
