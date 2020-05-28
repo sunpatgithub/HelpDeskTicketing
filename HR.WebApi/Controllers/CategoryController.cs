@@ -23,7 +23,7 @@ namespace HR.WebApi.Controllers
 
         [HttpGet]
         [HttpGet("{recordLimit}")]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.ViewAll })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.ViewAll })]
         public async Task<IActionResult> GetAll(int recordLimit)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -47,7 +47,7 @@ namespace HR.WebApi.Controllers
 
         // GET: api/Category/5
         [HttpGet("{id}")]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.View })]
+       // [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.View })]
         public async Task<IActionResult> Get(int id)
         {
             ResponseHelper objHelper = new ResponseHelper();
