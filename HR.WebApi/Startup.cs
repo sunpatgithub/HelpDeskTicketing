@@ -178,6 +178,9 @@ namespace HR.WebApi
 
             #region Help Desk Repository List
             services.AddTransient(typeof(ICommonRepository<Category>), typeof(CategoryRepository<Category>));
+            services.AddTransient(typeof(ICommonRepository<Ticket>), typeof(TicketRepository<Ticket>));
+            services.AddTransient(typeof(ICommonRepository<TicketLog>), typeof(TicketRepository<TicketLog>));
+            //services.AddTransient(typeof(ICommonRepository<Ticket>), typeof(TicketRepository<Ticket>));
             #endregion
 
 
