@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HR.WebApi.Model
 {
-    
+    [Table("ticket_log")]
     public  class TicketLog
     {
         [Key]
@@ -15,6 +15,7 @@ namespace HR.WebApi.Model
         public string Comments { get; set; }
         public int? AddedBy { get; set; }
         public DateTime? AddedOn { get; set; }
+        public string Status { get; set; }
        
     }
 }
