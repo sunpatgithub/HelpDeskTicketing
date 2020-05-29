@@ -9,6 +9,7 @@ using HR.WebApi.Interfaces;
 using HR.WebApi.Model;
 using HR.WebApi.ModelView;
 using Microsoft.AspNetCore.Http;
+using HR.WebApi.Repositories;
 
 namespace HR.WebApi.Controllers
 {
@@ -17,10 +18,19 @@ namespace HR.WebApi.Controllers
     [ActionFilters.Log]
     public class TicketController : ControllerBase
     {
-        private ICommonRepository<Ticket> ticketRepository { get; set; }
-        public TicketController(ICommonRepository<Ticket> commonRepository)
+        private ITicket<Ticket> ticketRepository { get; set; }
+        private ITicketLog<TicketLog> ticketlogRepository { get; set; }
+
+        //public TicketController(ICommonRepository<Ticket> commonRepository, ITicketLog<TicketLog> ticketlog_Repository)
+        //{
+        //    this.ticketRepository = commonRepository;
+        //    this.ticketlogRepository = ticketlog_Repository;
+        //}
+
+        public TicketController(ITicket<Ticket> commonRepository, ITicketLog<TicketLog> ticketlog_Repository)
         {
             this.ticketRepository = commonRepository;
+            this.ticketlogRepository = ticketlog_Repository;
         }
 
         [HttpGet]
@@ -115,14 +125,16 @@ namespace HR.WebApi.Controllers
 
             try
             {
-                if (ticketRepository.Exists(ticket))
-                {
-                    objHelper.Status = StatusCodes.Status200OK;
-                    objHelper.Message = "Data already available";
-                    return Ok(objHelper);
-                }
+                //if (ticketRepository.Exists(ticket))
+                //{
+                //    objHelper.Status = StatusCodes.Status200OK;
+                //    objHelper.Message = "Data already available";
+                //    return Ok(objHelper);
+                //}
 
-                await ticketRepository.Insert(ticket);
+                var newticket = await ticketRepository.Insert(ticket);
+                await ticketlogRepository.Insert(GetTicketLogFromTicket(newticket, "Inserted", ""));
+
                 objHelper.Status = StatusCodes.Status200OK;
                 objHelper.Message = "Saved Successfully";
                 objHelper.Data = ticket;
@@ -134,6 +146,18 @@ namespace HR.WebApi.Controllers
                 objHelper.Message = ex.Message;
                 return StatusCode(StatusCodes.Status500InternalServerError, objHelper);
             }
+        }
+
+        private TicketLog GetTicketLogFromTicket(Ticket ticket, string action, string comments)
+        {
+            TicketLog ticketlog = new TicketLog();
+            ticketlog.TicketId = ticket.TicketId;
+            ticketlog.Action = action;
+            ticketlog.Comments = comments;
+            ticketlog.AddedBy = ticket.AddedBy;
+            ticketlog.AddedOn = ticket.AddedOn;
+            ticketlog.Status = ticket.Status;
+            return ticketlog;
         }
 
         // PUT: api/Ticket/5
@@ -152,14 +176,16 @@ namespace HR.WebApi.Controllers
 
             try
             {
-                if (ticketRepository.Exists(ticket))
-                {
-                    objHelper.Status = StatusCodes.Status200OK;
-                    objHelper.Message = "Data already available";
-                    return Ok(objHelper);
-                }
+                //if (ticketRepository.Exists(ticket))
+                //{
+                //    objHelper.Status = StatusCodes.Status200OK;
+                //    objHelper.Message = "Data already available";
+                //    return Ok(objHelper);
+                //}
 
-                await ticketRepository.Update(ticket);
+                var updatedticket = await ticketRepository.Update(ticket);
+                await ticketlogRepository.Insert(GetTicketLogFromTicket(updatedticket, "Updated", ""));
+
                 objHelper.Status = StatusCodes.Status200OK;
                 objHelper.Message = "Saved Successfully";
                 objHelper.Data = ticket;
@@ -173,10 +199,10 @@ namespace HR.WebApi.Controllers
             }
         }
 
-        [HttpPut("{id},{isActive}")]
+        [HttpPut("{id}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
         //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Ticket", EnumPermission.Edit })]
-        public async Task<IActionResult> UpdateStatus(int id, short isActive)
+        public async Task<IActionResult> UpdateStatus(int id, string status, string comment) // string comment
         {
             ResponseHelper objHelper = new ResponseHelper();
             if (!ModelState.IsValid)
@@ -187,7 +213,9 @@ namespace HR.WebApi.Controllers
             }
             try
             {
-                await ticketRepository.ToogleStatus(id, isActive);
+                var ticket = await ticketRepository.ToogleStatus(id, status);
+                await ticketlogRepository.Insert(GetTicketLogFromTicket(ticket, "Changed Status", comment));
+
                 objHelper.Status = StatusCodes.Status200OK;
                 objHelper.Message = "Saved Successfully";
                 return Ok(objHelper);
@@ -209,7 +237,8 @@ namespace HR.WebApi.Controllers
             ResponseHelper objHelper = new ResponseHelper();
             try
             {
-                await ticketRepository.Delete(id);
+                await ticketRepository.Delete(id, "Delete","");
+
                 objHelper.Status = StatusCodes.Status200OK;
                 objHelper.Message = "Saved Successfully";
                 return Ok(objHelper);
