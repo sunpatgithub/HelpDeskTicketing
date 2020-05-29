@@ -93,8 +93,8 @@ namespace HR.WebApi.DAL
 
         public DbSet<Ticket> ticket { get; set; }
 
-        public DbSet<TicketLog> TicketLog { get; set; }
+        public DbSet<TicketLog> ticketlog { get; set; }
 
-        public DbSet<Attachment> Attachment { get; set; }
+        public DbSet<Attachment> attachment { get; set; }
     }
 }
