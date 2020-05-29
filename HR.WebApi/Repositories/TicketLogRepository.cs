@@ -10,7 +10,7 @@ using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace HR.WebApi.Repositories
 {
-    public class TicketLogRepository<T> 
+    public class TicketLogRepository<T> : ITicketLog<TicketLog>
     {
         private readonly ApplicationDbContext adbContext;
 
@@ -25,9 +25,9 @@ namespace HR.WebApi.Repositories
             {
                 IEnumerable<TicketLog> vList;
                 if (RecordLimit > 0)
-                    vList = adbContext.TicketLog.Take(RecordLimit).ToList();
+                    vList = adbContext.ticketlog.Take(RecordLimit).ToList();
                 else
-                    vList = adbContext.TicketLog.ToList();
+                    vList = adbContext.ticketlog.ToList();
                 if (vList == null || vList.Count() == 0)
                     throw new RecoredNotFoundException("Get Data Empty");
 
@@ -43,7 +43,7 @@ namespace HR.WebApi.Repositories
         {
             try
             {
-                var vList = adbContext.TicketLog.Where(w => w.LogId == id).ToList();
+                var vList = adbContext.ticketlog.Where(w => w.LogId == id).ToList();
                 if (vList == null || vList.Count() == 0)
                     throw new RecoredNotFoundException("Get Data Empty");
 
@@ -80,7 +80,7 @@ namespace HR.WebApi.Repositories
             try
             {
                 entity.AddedOn = DateTime.Now;
-                adbContext.TicketLog.Add(entity);
+                adbContext.ticketlog.Add(entity);
                 await Task.FromResult(adbContext.SaveChanges());
             }
             catch (Exception ex)

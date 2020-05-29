@@ -9,7 +9,7 @@ using HR.WebApi.Model;
 
 namespace HR.WebApi.Repositories
 {
-    public class TicketRepository<T> : ICommonRepository<Ticket>
+    public class TicketRepository<T> : ITicket<Ticket>
     {
         private readonly ApplicationDbContext adbContext;
 
@@ -74,13 +74,15 @@ namespace HR.WebApi.Repositories
             }
         }
 
-        public async Task Insert(Ticket entity)
+        public async Task<Ticket> Insert(Ticket entity)
         {
             try
             {
                 entity.AddedOn = DateTime.Now;
                 adbContext.ticket.Add(entity);
                 await Task.FromResult(adbContext.SaveChanges());
+
+                return entity;
             }
             catch (Exception ex)
             {
@@ -88,7 +90,7 @@ namespace HR.WebApi.Repositories
             }
         }
 
-        public async Task Update(Ticket entity)
+        public async Task<Ticket> Update(Ticket entity)
         {
             try
             {
@@ -115,6 +117,8 @@ namespace HR.WebApi.Repositories
                     adbContext.ticket.Update(lstTicket);
                     await Task.FromResult(adbContext.SaveChanges());
 
+                    return lstTicket;
+
                 }
                 catch (Exception ex)
                 {
@@ -127,17 +131,20 @@ namespace HR.WebApi.Repositories
             }
         }
 
-        public async Task ToogleStatus(int id, Int16 isActive)
+        public async Task<Ticket> ToogleStatus(int id, string status)
         {
             try
             {
                 //update flag isActive=0
-                var vList = adbContext.ticket.Where(w => w.TicketId == id && w.IsActive != isActive).SingleOrDefault();
+                var vList = adbContext.ticket.Where(w => w.TicketId == id).SingleOrDefault();
                 if (vList == null)
                     throw new RecoredNotFoundException("Data Not Available");
-                vList.IsActive = isActive;
+                vList.Status = status;
+
                 adbContext.ticket.Update(vList);
                 await Task.FromResult(adbContext.SaveChanges());
+
+                return vList;
 
             }
             catch (Exception ex)
@@ -146,7 +153,7 @@ namespace HR.WebApi.Repositories
             }
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int id, string action, string comment)
         {
             try
             {
@@ -156,6 +163,8 @@ namespace HR.WebApi.Repositories
                     throw new RecoredNotFoundException("Data Not Available");
                 adbContext.ticket.Remove(vList);
                 await Task.FromResult(adbContext.SaveChanges());
+
+                //InsertTicketLog(vList, action, comment);
 
             }
             catch (Exception ex)
