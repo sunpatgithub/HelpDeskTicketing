@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Description>Developed by Mehul Parmar</Description>
-    <PackageReleaseNotes>Developed by Mehul Parmar</PackageReleaseNotes>
-    <Copyright>Developed by Mehul Parmar</Copyright>
+    <Description>Developed by Sunil Patel</Description>
+    <PackageReleaseNotes>Developed by Sunil Patel</PackageReleaseNotes>
+    <Copyright>Developed by Sunil Patel</Copyright>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
