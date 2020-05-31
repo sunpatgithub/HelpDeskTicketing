@@ -9,6 +9,7 @@ namespace HR.WebApi.Model
         public int? User_Id { get; set; }
         public string Login_Id { get; set; }
         public string Token_No { get; set; }
+        public string EmpName { get; set; }
         public int? Company_Id { get; set; }
 
         public bool isExpired { get; set; } = false; //Password Verified But User date Expired
