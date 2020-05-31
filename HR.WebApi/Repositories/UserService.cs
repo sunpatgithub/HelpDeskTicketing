@@ -632,7 +632,8 @@ namespace HR.WebApi.Repositories
 
                 objUserResponse.User_Id = vList.User_Id;
                 objUserResponse.Login_Id = vList.Login_Id;
-                objUserResponse.Company_Id = vList.Company_Id;
+                objUserResponse.EmpName = vList.FirstName + " " + vList.MiddleName + " " + vList.LastName;
+               // objUserResponse.Company_Id = vList.Company_Id;
 
                 if (vList.PasswordExpiryDate <= DateTime.Now)   //need one check for temporary password
                     objUserResponse.isExpired = true;
@@ -671,18 +672,19 @@ namespace HR.WebApi.Repositories
             {
                 dList = (from ur in adbContext.user_role.AsQueryable()
                          join rp in adbContext.role_permission.AsQueryable() on ur.Role_Id equals rp.Role_Id
-                         join mp in adbContext.module_permission.AsQueryable() on rp.Module_Per_Id equals mp.Id
-                         join m in adbContext.module.AsQueryable() on mp.Module_Id equals m.Id
-                         where ur.User_Id == intUserId && ur.isActive == 1 && rp.isActive == 1 && mp.isActive == 1 && m.isActive == 1
+                         //join mp in adbContext.module_permission.AsQueryable() on rp.Module_Per_Id equals mp.Id
+                         //join m in adbContext.module.AsQueryable() on mp.Module_Id equals m.Id
+                         where ur.User_Id == intUserId && ur.isActive == 1 && rp.isActive == 1 
+                         //&& mp.isActive == 1 && m.isActive == 1
                          select new UserRolesList
                          {
                              Role_Id = rp.Role_Id,
-                             Module_Per_Id = mp.Id,
-                             Module_Id = m.Id,
-                             Module_DisplayName = m.DisplayName,
-                             Module_Name = m.Name,
-                             Module_Permission = mp.Name,
-                             Module_Url = m.Url
+                             //Module_Per_Id = mp.Id,
+                             //Module_Id = m.Id,
+                             //Module_DisplayName = m.DisplayName,
+                             //Module_Name = m.Name,
+                             //Module_Permission = mp.Name,
+                             //Module_Url = m.Url
                          }).Distinct().ToList();
             }
             catch (Exception ex)
