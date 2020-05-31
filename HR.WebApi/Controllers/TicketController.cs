@@ -20,11 +20,13 @@ namespace HR.WebApi.Controllers
     {
         private ITicket<Ticket> ticketRepository { get; set; }
         private ITicketLog<TicketLog> ticketlogRepository { get; set; }
+        //private IDocuments document { get; set; }
 
-        //public TicketController(ICommonRepository<Ticket> commonRepository, ITicketLog<TicketLog> ticketlog_Repository)
+        //public TicketController(ITicket<Ticket> commonRepository, ITicketLog<TicketLog> ticketlog_Repository, IDocuments commonDocument)
         //{
         //    this.ticketRepository = commonRepository;
         //    this.ticketlogRepository = ticketlog_Repository;
+        //    this.document = commonDocument;
         //}
 
         public TicketController(ITicket<Ticket> commonRepository, ITicketLog<TicketLog> ticketlog_Repository)
@@ -134,6 +136,7 @@ namespace HR.WebApi.Controllers
 
                 var newticket = await ticketRepository.Insert(ticket);
                 await ticketlogRepository.Insert(GetTicketLogFromTicket(newticket, "Inserted", ""));
+                //string path = document.UploadFile(files, "E-913");
 
                 objHelper.Status = StatusCodes.Status200OK;
                 objHelper.Message = "Saved Successfully";
@@ -250,5 +253,9 @@ namespace HR.WebApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, objHelper);
             }
         }
+
+
+
+  
     }
 }
