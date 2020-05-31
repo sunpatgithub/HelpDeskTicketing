@@ -30,7 +30,7 @@ namespace HR.WebApi.Controllers
         [HttpGet]
         [HttpGet("{recordLimit}")]
         //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.ViewAll })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.ViewAll })]
         public IActionResult GetAll(int RecordLimit)
         {
             ResponseHelper objResHelper = new ResponseHelper();
@@ -55,7 +55,7 @@ namespace HR.WebApi.Controllers
         // GET: api/User/5
         [HttpGet("{id}")]
         //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.View })]
+       // [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.View })]
         public IActionResult Get(int id)
         {
             ResponseHelper objResHelper = new ResponseHelper();
@@ -81,7 +81,7 @@ namespace HR.WebApi.Controllers
         //[HttpGet] old
         [HttpPost]
         //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.View })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.View })]
         public IActionResult FindPagination(Pagination pagination)
         {
             ResponseHelper objResHelper = new ResponseHelper();
@@ -116,7 +116,7 @@ namespace HR.WebApi.Controllers
         [HttpPost]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
         //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Add })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Add })]
         public IActionResult Add(UserView user)
         {
             ResponseHelper objResHelper = new ResponseHelper();
@@ -157,7 +157,7 @@ namespace HR.WebApi.Controllers
         [HttpPut]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
         //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Edit })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Edit })]
         public IActionResult Edit(UserView user)
         {
             ResponseHelper objResHelper = new ResponseHelper();
@@ -196,7 +196,7 @@ namespace HR.WebApi.Controllers
         [HttpPut("{id},{isActive}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
         //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Edit })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Edit })]
         public IActionResult StatusChange(int id, short isActive)
         {
             ResponseHelper objResHelper = new ResponseHelper();
@@ -224,7 +224,7 @@ namespace HR.WebApi.Controllers
         [HttpDelete("{id}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
         //[ServiceFilter(typeof(ActionFilters.TokenVerify))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Delete })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User", EnumPermission.Delete })]
         public IActionResult Delete(int id)
         {
             ResponseHelper objResHelper = new ResponseHelper();

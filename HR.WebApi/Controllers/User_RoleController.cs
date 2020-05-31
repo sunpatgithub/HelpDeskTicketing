@@ -26,7 +26,7 @@ namespace HR.WebApi.Controllers
 
         [HttpGet]
         [HttpGet("{recordLimit}")]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.ViewAll })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.ViewAll })]
         public async Task<IActionResult> GetAll(int RecordLimit)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -50,7 +50,7 @@ namespace HR.WebApi.Controllers
 
         // GET: api/User_Role/5
         [HttpGet("{id}")]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.View })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.View })]
         public async Task<IActionResult> Get(int id)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -74,7 +74,7 @@ namespace HR.WebApi.Controllers
 
         //[HttpGet] old
         [HttpPost]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.View })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.View })]
         public async Task<IActionResult> GetBy(SearchBy searchBy)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -99,7 +99,7 @@ namespace HR.WebApi.Controllers
         // GET: api/User_Role/5
         //[HttpGet] old
         [HttpPost]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.View })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.View })]
         public async Task<IActionResult> FindPagination(Pagination pagination)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -132,7 +132,7 @@ namespace HR.WebApi.Controllers
         // POST: api/User_Role
         [HttpPost]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.Add })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.Add })]
         public async Task<IActionResult> Add(User_RoleView user_Role)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -170,7 +170,7 @@ namespace HR.WebApi.Controllers
         // PUT: api/User_Role/Edit - body data User_RoleView model
         [HttpPut]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.Edit })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.Edit })]
         public async Task<IActionResult> Edit(User_RoleView user_Role)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -206,7 +206,7 @@ namespace HR.WebApi.Controllers
 
         [HttpPut("{id},{isActive}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.Edit })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.Edit })]
         public async Task<IActionResult> UpdateStatus(int id, short isActive)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -234,7 +234,7 @@ namespace HR.WebApi.Controllers
         // DELETE: api/User_Role/5
         [HttpDelete("{id}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.Delete })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "User_Role", EnumPermission.Delete })]
         public async Task<IActionResult> Delete(int id)
         {
             ResponseHelper objHelper = new ResponseHelper();

@@ -28,7 +28,7 @@ namespace HR.WebApi.Controllers
 
         [HttpGet()]
         [HttpGet("{recordLimit}")]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Employee", EnumPermission.ViewAll })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Employee", EnumPermission.ViewAll })]
         public async Task<IActionResult> GetAll(int recordLimit)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -51,7 +51,7 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Employee", EnumPermission.View })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Employee", EnumPermission.View })]
         public async Task<IActionResult> Get(int id)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -75,7 +75,7 @@ namespace HR.WebApi.Controllers
 
         //[HttpGet] old
         [HttpPost]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Employee", EnumPermission.View })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Employee", EnumPermission.View })]
         public async Task<IActionResult> GetBy(PaginationBy searchBy)
         {
             ResponseHelper objHelper = new ResponseHelper();

@@ -73,7 +73,7 @@ namespace HR.WebApi.Controllers
         // GET: api/Category/FindPagination - body data { PageIndex:0 , PageSize:10, CommonSearch: "test" }
         //[HttpGet] old
         [HttpPost]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.View })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.View })]
         public async Task<IActionResult> FindPagination(Pagination pagination)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -137,7 +137,7 @@ namespace HR.WebApi.Controllers
         // PUT: api/Category/5
         [HttpPut]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.Edit })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.Edit })]
         public async Task<IActionResult> Edit(Category category)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -173,7 +173,7 @@ namespace HR.WebApi.Controllers
 
         [HttpPut("{id},{isActive}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.Edit })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.Edit })]
         public async Task<IActionResult> UpdateStatus(int id, short isActive)
         {
             ResponseHelper objHelper = new ResponseHelper();
@@ -201,7 +201,7 @@ namespace HR.WebApi.Controllers
         // DELETE: api/Category/5
         [HttpDelete("{id}")]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
-        [TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.Delete })]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Category", EnumPermission.Delete })]
         public async Task<IActionResult> Delete(int id)
         {
             ResponseHelper objHelper = new ResponseHelper();
