@@ -255,7 +255,8 @@ namespace HR.WebApi.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        //[HttpPut("{id}")]
+        [HttpPut]
         [ServiceFilter(typeof(ActionFilters.AuditLog))]
         //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Ticket", EnumPermission.Edit })]
         public async Task<IActionResult> ReassignTicket(ReassignTicketParameters re) // string comment
