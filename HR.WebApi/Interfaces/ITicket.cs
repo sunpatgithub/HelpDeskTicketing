@@ -26,5 +26,7 @@ namespace HR.WebApi.Interfaces
         Task Delete(int id, string action, string comment);
 
         bool Exists(T entity);
+
+        Task<T> ReassignTicketMethod(int ticketId, int deptId, int assigneeId);
     }
 }
