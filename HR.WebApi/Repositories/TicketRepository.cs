@@ -153,6 +153,29 @@ namespace HR.WebApi.Repositories
             }
         }
 
+        public async Task<Ticket> ReassignTicketMethod(int id, int deptId, int assigneeId)
+        {
+            try
+            {
+                //update flag isActive=0
+                var vList = adbContext.ticket.Where(w => w.TicketId == id).SingleOrDefault();
+                if (vList == null)
+                    throw new RecoredNotFoundException("Data Not Available");
+                vList.DeptId = deptId;
+                vList.AssigneeId = assigneeId;
+
+                adbContext.ticket.Update(vList);
+                await Task.FromResult(adbContext.SaveChanges());
+
+                return vList;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task Delete(int id, string action, string comment)
         {
             try
