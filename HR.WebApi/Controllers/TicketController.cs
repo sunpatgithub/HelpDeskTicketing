@@ -255,7 +255,34 @@ namespace HR.WebApi.Controllers
         }
 
 
+        [HttpPut("{id}")]
+        [ServiceFilter(typeof(ActionFilters.AuditLog))]
+        //[TypeFilter(typeof(ActionFilters.RolesValidate), Arguments = new object[] { "Ticket", EnumPermission.Edit })]
+        public async Task<IActionResult> ReassignTicket(ReassignTicketParameters re) // string comment
+        {
+            ResponseHelper objHelper = new ResponseHelper();
+            if (!ModelState.IsValid)
+            {
+                objHelper.Status = StatusCodes.Status424FailedDependency;
+                objHelper.Message = "Invalid Model State";
+                return BadRequest(objHelper);
+            }
+            try
+            {
+                var ticket = await ticketRepository.ReassignTicketMethod(re.ticketId, re.deptId, re.assigneeId);
+                await ticketlogRepository.Insert(GetTicketLogFromTicket(ticket, "Reassigned Ticket", re.comment));
 
-  
+                objHelper.Status = StatusCodes.Status200OK;
+                objHelper.Message = "Saved Successfully";
+                return Ok(objHelper);
+            }
+            catch (Exception ex)
+            {
+                objHelper.Status = StatusCodes.Status500InternalServerError;
+                objHelper.Message = ex.Message;
+                return StatusCode(StatusCodes.Status500InternalServerError, objHelper);
+            }
+        }
+
     }
 }
