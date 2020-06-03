@@ -13,7 +13,7 @@ namespace HR.WebApi.Model
         public int TicketId { get; set; }
         public string Action { get; set; }
         public string Comments { get; set; }
-        public int? AddedBy { get; set; }
+        public string AddedById { get; set; }
         public DateTime? AddedOn { get; set; }
         public string Status { get; set; }
        

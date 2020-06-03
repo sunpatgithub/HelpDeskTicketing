@@ -10,7 +10,7 @@ namespace HR.WebApi.Model
     {
         [Key]
         public int TicketId { get; set; }
-        public int RequesterId { get; set; }
+        public string RequesterId { get; set; }
         public string Requester { get; set; }
         public string Subject { get; set; }
         public string Description { get; set; }
@@ -20,13 +20,13 @@ namespace HR.WebApi.Model
         public string Priority { get; set; }
         public int DeptId { get; set; }
         public string DepartmentName { get; set; }
-        public int? AssigneeId { get; set; }
-        public string AssigneeName { get; set; }
+        public string AssignToId { get; set; }
+        public string AssignToName { get; set; }
         public Int16 IsActive { get; set; }
-        public int? AddedBy { get; set; }
+        public string AddedById { get; set; }
         public string AddedByName { get; set; }
         public DateTime? AddedOn { get; set; }
-        public int? UpdatedBy { get; set; }
+        public string UpdatedById { get; set; }
         public string UpdatedByName { get; set; }
         public DateTime? UpdatedOn { get; set; }
         

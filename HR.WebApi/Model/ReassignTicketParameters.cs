@@ -10,7 +10,7 @@ namespace HR.WebApi.Model
     {
         public int ticketId { get; set; }
         public int deptId { get; set; }
-        public int assigneeId { get; set; }
+        public string assignToId { get; set; }
         public string comment { get; set; } = "";
     }
 }
