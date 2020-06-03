@@ -106,11 +106,11 @@ namespace HR.WebApi.Repositories
                     lstTicket.Status = entity.Status;
                     lstTicket.Priority = entity.Priority;
                     lstTicket.DeptId = entity.DeptId;
-                    lstTicket.AssigneeId = entity.AssigneeId;
+                    lstTicket.AssignToId = entity.AssignToId;
                     lstTicket.IsActive = entity.IsActive;
-                    lstTicket.AddedBy = entity.AddedBy;
+                    lstTicket.AddedById = entity.AddedById;
                     lstTicket.AddedOn = entity.AddedOn;
-                    lstTicket.UpdatedBy = entity.UpdatedBy;
+                    lstTicket.UpdatedById = entity.UpdatedById;
                     lstTicket.UpdatedOn = DateTime.Now;
                     
 
@@ -153,7 +153,7 @@ namespace HR.WebApi.Repositories
             }
         }
 
-        public async Task<Ticket> ReassignTicketMethod(int id, int deptId, int assigneeId)
+        public async Task<Ticket> ReassignTicketMethod(int id, int deptId, string assignToId)
         {
             try
             {
@@ -162,7 +162,7 @@ namespace HR.WebApi.Repositories
                 if (vList == null)
                     throw new RecoredNotFoundException("Data Not Available");
                 vList.DeptId = deptId;
-                vList.AssigneeId = assigneeId;
+                vList.AssignToId = assignToId;
 
                 adbContext.ticket.Update(vList);
                 await Task.FromResult(adbContext.SaveChanges());
@@ -186,8 +186,6 @@ namespace HR.WebApi.Repositories
                     throw new RecoredNotFoundException("Data Not Available");
                 adbContext.ticket.Remove(vList);
                 await Task.FromResult(adbContext.SaveChanges());
-
-                //InsertTicketLog(vList, action, comment);
 
             }
             catch (Exception ex)
