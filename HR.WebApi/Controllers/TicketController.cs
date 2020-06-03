@@ -157,7 +157,7 @@ namespace HR.WebApi.Controllers
             ticketlog.TicketId = ticket.TicketId;
             ticketlog.Action = action;
             ticketlog.Comments = comments;
-            ticketlog.AddedBy = ticket.AddedBy;
+            ticketlog.AddedById = ticket.AddedById;
             ticketlog.AddedOn = ticket.AddedOn;
             ticketlog.Status = ticket.Status;
             return ticketlog;
@@ -270,7 +270,7 @@ namespace HR.WebApi.Controllers
             }
             try
             {
-                var ticket = await ticketRepository.ReassignTicketMethod(re.ticketId, re.deptId, re.assigneeId);
+                var ticket = await ticketRepository.ReassignTicketMethod(re.ticketId, re.deptId, re.assignToId);
                 await ticketlogRepository.Insert(GetTicketLogFromTicket(ticket, "Reassigned Ticket", re.comment));
 
                 objHelper.Status = StatusCodes.Status200OK;
