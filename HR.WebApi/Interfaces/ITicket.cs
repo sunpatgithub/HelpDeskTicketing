@@ -27,6 +27,6 @@ namespace HR.WebApi.Interfaces
 
         bool Exists(T entity);
 
-        Task<T> ReassignTicketMethod(int ticketId, int deptId, int assigneeId);
+        Task<T> ReassignTicketMethod(int ticketId, int deptId, string assignToId);
     }
 }
