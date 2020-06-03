@@ -31,14 +31,17 @@ namespace HR.WebApi.Repositories
                              join c in adbContext.category on t.CatId equals c.CatId
                              join u in adbContext.users on t.RequesterId equals u.User_Id
                              join a in adbContext.users on t.AssigneeId equals a.User_Id
-                             join b in adbContext.users on t.AddedBy equals b.User_Id
+                            // join b in adbContext.users on t.AddedBy equals b.User_Id
+                             join er in adbContext.employee_basicinfo on u.Emp_Id equals er.Emp_Id
+                             join ea in adbContext.employee_basicinfo on a.Emp_Id equals ea.Emp_Id
+                            // join ec in adbContext.employee_basicinfo on b.Emp_Id equals ec.Emp_Id
                              //join p in adbContext.users on t.UpdatedBy equals p.User_Id
                              //join zone in adbContext.zone on desig.Zone_Id equals zone.Zone_Id
                              select new FullTicket
                              {
                                  TicketId = t.TicketId,
                                  RequesterId = t.RequesterId,
-                                 Requester = u.Login_Id,
+                                 Requester = er.FirstName + " " + er.LastName,
                                  Subject = t.Subject,
                                  Description = t.Description,
                                  CatId = t.CatId,
@@ -48,11 +51,11 @@ namespace HR.WebApi.Repositories
                                  DeptId = t.DeptId,
                                  DepartmentName = d.Dept_Name,
                                  AssigneeId = t.AssigneeId,
-                                 AssigneeName = a.Login_Id,
+                                 AssigneeName = ea.FirstName + " " + ea.LastName,
                                  IsActive = t.IsActive,
                                  AddedOn = t.AddedOn,
                                  AddedBy = t.AddedBy,
-                                 AddedByName = b.Login_Id,
+                                 AddedByName = ea.FirstName + " " + ea.LastName,
                                  UpdatedBy = t.UpdatedBy,
                                  //UpdatedByName = b.Login_Id,
                                  UpdatedOn = t.UpdatedOn
