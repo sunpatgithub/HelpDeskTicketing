@@ -184,6 +184,8 @@ namespace HR.WebApi
             services.AddTransient(typeof(ITicketLog<TicketLog>), typeof(TicketLogRepository<TicketLog>));
             services.AddTransient(typeof(IFullTicket<FullTicket>), typeof(FullTicketRepository<FullTicket>));
             services.AddTransient(typeof(IDocuments), typeof(Documents));
+            services.AddTransient(typeof(IEmployee_BasicInfo<Employee_BasicInfo>), typeof(Employee_BasicInfoRepository<Employee_BasicInfo>));
+            
             #endregion
 
 
